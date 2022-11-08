@@ -1,0 +1,34 @@
+name: AWS
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+    timeout-minutes: 9999
+
+    steps:
+
+    - name: Install Rclone
+      run: sudo apt-get install screen git && curl https://rclone.org/install.sh | sudo bash
+      
+    - name: Download Autorclone
+      run: wget https://www.dropbox.com/s/ujxbl4m9wtk082l/AutoRclone2.zip && unzip "AutoRclone2.zip"
+    
+    - name: Show File Location
+      run: pwd
+      
+    - name: Find File Location
+      run: find ./ -name AutoRclone2.zip
+    
+    - name: Into Autorclone amd Python Run
+      working-directory: ./AutoRclone
+      run: |
+          pwd
+          python3 rclone_sa_magic.py -s 0ADtpZRykFlKtUk9PVA -d 0AEEtbNWMZWHJUk9PVA -b 201 -e 300
+          
+    - name: Into Autorclone amd Python Run (2)
+      working-directory: ./AutoRclone
+      run: |
+          pwd
+          python3 rclone_sa_magic.py -s 0ADtpZRykFlKtUk9PVA -d 0AEEtbNWMZWHJUk9PVA -b 301 -e 400  
